@@ -1,0 +1,1 @@
+These are the original unmodified source files for openRTS that were used in project tether. 

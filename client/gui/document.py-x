@@ -1,0 +1,75 @@
+import pygame
+import container, layout
+
+class _document_widget:
+    def __init__(self,w,align=None):
+        w.rect.w,w.rect.h = w.resize()
+        self.rect = w.rect
+        self.widget = w
+        if align != None: self.align = align
+
+class Document(container.Container):
+    def __init__(self,**params):
+        params.setdefault('cls','document')
+        container.Container.__init__(self,**params)
+        self.layout =  layout.Layout(pygame.Rect(0,0,self.rect.w,self.rect.h))
+    
+    def add(self,e,align=None):
+        dw = _document_widget(e,align)
+        self.layout.add(dw)
+        e.container = self
+        e._c_dw = dw
+        self.widgets.append(e)
+    
+    def block(self,align):
+        self.layout.add(align)
+    
+    def space(self,e):
+        self.layout.add(e)
+    
+    def br(self,height):
+        self.layout.add((0,height))
+    
+    def resize(self,width=None,height=None):
+        min_w = 0
+        min_h = 0
+        max_w = width
+        max_h = height
+        if self.style.width: min_w,max_w = self.style.width,self.style.width
+        
+        print self,max_w
+        
+        if self.style.height: min_h,max_h = self.style.height,self.style.height
+        
+        if max_w == None: max_w = 65535 #HACK: a big number
+        
+        for w in self.widgets:
+            #w.rect.w,w.rect.h = 0,0
+            #w.rect.w,w.rect.h = w.resize()
+            #xt,xl,xb,xr = w.getspacing()
+            #_min_w,_max_w = w.getwidths()
+            #_w = min(max_w,_max_w)
+            w.rect.w,w.rect.h = w.resize()
+            
+            if w.rect.w > max_w:
+                w.rect.w,w.rect.h = w.resize(width=max_w)
+            dw = w._c_dw
+            dw.rect = pygame.Rect(0,0,w.rect.w,w.rect.h)
+        
+        self.layout.rect = pygame.Rect(0,0,max_w,0)
+        self.layout.resize()
+        
+        _max_w = 0
+        
+        for w in self.widgets:
+            #xt,xl,xb,xr = w.getspacing()
+            dw = w._c_dw
+            w.style.x,w.style.y,w.rect.w,w.rect.h = dw.rect.x,dw.rect.y,dw.rect.w,dw.rect.h
+            #w.resize()
+            w.rect.x,w.rect.y = w.style.x,w.style.y
+            _max_w = max(_max_w,w.rect.right)
+        
+        #self.rect.w = _max_w #self.layout.rect.w
+        #self.rect.h = self.layout.rect.h
+        #print 'document',_max_w,self.layout.rect.h
+        return _max_w,self.layout.rect.h

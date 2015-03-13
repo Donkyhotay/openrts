@@ -1,0 +1,25 @@
+
+OpenRTS uses gettext for translations.
+
+OpenRTS is currently available in the following languages:
+-English
+-German
+-Norwegian
+
+Here's information about Internationalization:
+http://wiki.wxpython.org/index.cgi/Internationalization
+
+
+Strings will be marked for translation like this:   _("text")
+
+Run pygettext.py to generate pot-file for your language,
+by running the following command in the OpenRTS main directory:
+python translations/pygettext.py `cat translations/pot-files`
+
+Next, process the generated .pot file with msgfmt to create a .mo file.
+
+The currently used language is set in data/settings.xml
+This will be improved with a GUI-setting or getting the current
+language from the system settings.
+
+	

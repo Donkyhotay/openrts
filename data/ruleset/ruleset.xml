@@ -1,0 +1,9 @@
+<ruleset name="OpenRTS Default">
+  <terrain type="ocean" full_name="Ocean"/>
+  <terrain type="plains" full_name="Plains"/>
+  <terrain type="coast" full_name="Coast"/>
+
+  <unit type="drone" full_name="Drone" speed="10">
+    <movement type="plains" movecost="10"/>
+  </unit>
+</ruleset>

@@ -1,0 +1,11 @@
+The people who have contributed to OpenRTS is:
+
+Project founder and developer:
+Andreas Røsdal <andrearo AT stud.ntnu.no>
+
+Graphics from Hard Vacuum:
+Daniel Cook <daniel.cook AT lostgarden.com>
+
+Graphics: 
+Oliver Stannus <oliver.stannus AT gmail.com>
+

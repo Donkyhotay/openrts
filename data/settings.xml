@@ -1,0 +1,12 @@
+<settings>
+  <openrts version="0.2"/>
+  <fullscreen enabled="true"/>
+  <language locale="en"/>
+  <screen width="1024" height="768"/>
+  <tileset src="data/graphics/tileset.xml"/>
+  <ruleset_default name="OpenRTS Default"/>
+  <ruleset name="OpenRTS Default" src="data/ruleset/ruleset.xml"/>
+  <psyco-jit enabled="false"/>
+</settings>
+
+
